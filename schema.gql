@@ -1,0 +1,141 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UserDto {
+  _id: String!
+  name: String!
+  email: String!
+}
+
+type CreateUserApiResponseDto {
+  code: Float!
+  message: String!
+  data: UserDto!
+}
+
+type FindAllUsersApiResponseDto {
+  code: Float!
+  message: String!
+  data: [UserDto!]
+}
+
+type CalculateContributionApiResponseDto {
+  code: Float!
+  message: String!
+  data: Float!
+}
+
+type ContributionDto {
+  _id: String
+  contributorId: String
+  projectId: String
+  contribution: Float
+}
+
+type AddContributionApiResponseDto {
+  code: Float!
+  message: String!
+  data: ContributionDto
+}
+
+type ContributionPercentageApiResponseDto {
+  code: Float!
+  message: String!
+  data: String
+}
+
+type ProjectDto {
+  _id: String!
+  name: String!
+  startingDate: DateTime!
+  endingDate: DateTime!
+  projectAmount: Float!
+  approved: Boolean!
+  createdAt: DateTime
+  createdBy: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type CreateProjectApiResponseDto {
+  code: Float!
+  message: String!
+  data: ProjectDto
+}
+
+type FindProjectsApiResponseDto {
+  code: Float!
+  message: String!
+  data: [ProjectDto!]!
+}
+
+type FindUserProjectsApiResponseDto {
+  code: Float!
+  message: String!
+  data: [ProjectDto!]
+}
+
+type ApprovedUnapprovedProjectsApiResponseDto {
+  code: Float!
+  message: String!
+  data: [ProjectDto!]
+}
+
+type ProjectsApiResponseDto {
+  code: Float!
+  message: String!
+  data: [ProjectDto!]
+}
+
+type Query {
+  findAll: FindAllUsersApiResponseDto!
+  findProjects: FindProjectsApiResponseDto!
+  findUserProjects(input: FindUserProjectsInput!): FindUserProjectsApiResponseDto!
+  findApprovedUnapprovedProjects(input: ApprovedUnapporvedProjectsInput!): ApprovedUnapprovedProjectsApiResponseDto!
+  findStartedAndGreaterAmount: ProjectsApiResponseDto!
+}
+
+input FindUserProjectsInput {
+  _id: String!
+}
+
+input ApprovedUnapporvedProjectsInput {
+  choice: String!
+}
+
+type Mutation {
+  createUser(input: CreateUserInput!): CreateUserApiResponseDto!
+  createProject(input: CreateProjectInput!): CreateProjectApiResponseDto!
+  findUserContributionsTillNow(input: FindUserProjectsInput!): CalculateContributionApiResponseDto!
+  addContribution(input: CreateContributionInput!): AddContributionApiResponseDto!
+  findPercentage(input: FindProjectInput!): ContributionPercentageApiResponseDto!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+}
+
+input CreateProjectInput {
+  name: String!
+  startingDate: DateTime!
+  endingDate: DateTime!
+  projectAmount: Float!
+  approved: Boolean
+  createdAt: DateTime
+  createdBy: ID!
+}
+
+input CreateContributionInput {
+  contributorId: ID!
+  projectId: ID!
+  contribution: Float!
+}
+
+input FindProjectInput {
+  _id: String!
+}
