@@ -68,7 +68,7 @@ export class ProjectsResolver {
   @Query(() => ProjectsApiResponseDto)
   async findStartedAndGreaterAmount()
   {
-    return await this.projectsService.findStartedAmountProjects();
+    return await this.projectsService.findStartedAmountProjects()
   } 
   
 }

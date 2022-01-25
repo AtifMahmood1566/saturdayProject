@@ -148,7 +148,7 @@ export class ProjectsService {
 
       var contributionDifference = project_amount - contributionSum;
 
-      if(project.createdBy === createContributionInput.contributorId)
+      if(project.createdBy == createContributionInput.contributorId)
       {
         let ApiResponse = {
           code : 204,
@@ -293,13 +293,7 @@ export class ProjectsService {
   async findStartedAmountProjects()
   {
     try{
-      const currentDate = new Date().setHours(0,0,0,0);
-      const date = new Date()
-      console.log('New date is : ' , date)
-      //var date = currentDate.getFullYear()+'-'+(currentDate.getMonth()+1)+'-'+currentDate.getDate();
-      console.log("date string is : " , currentDate)
-
-      console.log("current date is : " , currentDate)
+      const currentDate = new Date().setUTCHours(0,0,0,0);
 
       const projects = await this.projectModel.find({
       $or : [
@@ -307,8 +301,6 @@ export class ProjectsService {
         {startingDate : { $lt : currentDate }},
         {createdAt : {$eq : currentDate }}
       ]})
-
-      console.log("projects is : " , projects.length)
 
       if(!projects)
       {

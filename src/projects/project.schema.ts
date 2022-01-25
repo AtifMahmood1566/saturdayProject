@@ -20,7 +20,7 @@ export class Project extends Document{
     @Prop({default : false})
     approved : boolean;
 
-    @Prop({ default : new Date().setHours(0,0,0,0) })
+    @Prop({ default : new Date().setUTCHours(0,0,0,0) })
     createdAt : Date;
 
     @Prop()
