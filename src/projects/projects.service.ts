@@ -296,7 +296,7 @@ export class ProjectsService {
       const currentDate = new Date().setUTCHours(0,0,0,0);
 
       const projects = await this.projectModel.find({
-      $or : [
+      $and : [
         {projectAmount : { $gt : 5000 }},
         {startingDate : { $lt : currentDate }},
         {createdAt : {$eq : currentDate }}
